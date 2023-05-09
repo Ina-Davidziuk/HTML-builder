@@ -5,28 +5,27 @@ const path = require('node:path');
 
 const distFolder = path.join(__dirname, 'project-dist');
 
-const temlatePath = path.join(__dirname, 'template.html')
+const temlatePath = path.join(__dirname, 'template.html');
 
-const htmlDirPath = path.join(__dirname, 'project-dist', 'index.html')
+const htmlDirPath = path.join(__dirname, 'project-dist', 'index.html');
 
-const componetsPath = path.join(__dirname, 'components')
+const componetsPath = path.join(__dirname, 'components');
 
- const assetsDirPath = path.join(__dirname, 'project-dist', 'assets')
- const stylesDirPath = path.join(__dirname, 'project-dist', 'style.css')
+const assetsDirPath = path.join(__dirname, 'project-dist', 'assets');
+const stylesDirPath = path.join(__dirname, 'project-dist', 'style.css');
 
- const assetsPath = path.join(__dirname, 'assets');
+const assetsPath = path.join(__dirname, 'assets');
 const stylesPath = path.join(__dirname, 'styles');
 const writeStyleStream = fs.createWriteStream(stylesDirPath, 'utf-8');
 
 
 //Создаём папку project-dist.
 async function createDir() {
-    //await rm (distFolder, {force: true, recursive: true, maxRetries: 100});
     await mkdir(distFolder, { recursive: true }, err => {
         if(err){
         console.error(err);
         }
-        console.log('The folder created sucсessfully')
+        console.log('The folder created sucсessfully');
     });
 }
 createDir()
@@ -42,11 +41,9 @@ const readfilesInComponents = await readFile(filesInComponents, 'utf-8');
 readTemplate = readTemplate.replace(matchEl, readfilesInComponents)
     })
 await Promise.all(newFile);
-
-await writeFile(htmlDirPath, readTemplate)
+await writeFile(htmlDirPath, readTemplate);
 }
             
-        
 buildHtml ()
 
 //создания файла style.css
@@ -58,8 +55,8 @@ async function createStyles () {
             if (file.isFile() && fileExtension === '.css'){
             const writeStreamCss = fs.createReadStream(filesInStyleFile);
             writeStreamCss.on('data', data => writeStyleStream.write(data));
-         }
         }
+    }
 }
 createStyles ()
 
@@ -79,7 +76,7 @@ async function copyAssetsDir (oldFolder, newFolder) {
             await copyFile(filesInOldFolder, fileInNewFolder);
         }
         if(file.isDirectory()){
-            copyAssetsDir (filesInOldFolder, fileInNewFolder)
+            copyAssetsDir (filesInOldFolder, fileInNewFolder);
         }
             
     }
