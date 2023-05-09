@@ -12,7 +12,7 @@ async function copyDir () {
             console.error(err);
             }
         });
-        console.log('The folder is coppy sucsessfully');
+        console.log('The folder coppied sucсessfully');
         const files = await fs.readdir(filesPath, {withFileTypes: true});
         for (const file of files) {
             const filesInOldFolder = path.join(__dirname, 'files', file.name);
