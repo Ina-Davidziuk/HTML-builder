@@ -33,15 +33,17 @@ createDir()
 //Замена шаблонных тегов содержимым файлов-компонентов и запись изменённого шаблона в файл index.html в папке project-dist
 async function  buildHtml () {
 let readTemplate = await readFile(temlatePath, 'utf-8');
-let regExp = new RegExp(/\{\{(.+?)\}\}/g);
+let regExp = new RegExp(/\{\{(.+)\}\}/g);
 const newFile = readTemplate.match(regExp).map(async (matchEl) => {
-const fileElement = `${matchEl.slice(2,-2)}.html`
+let fileElement = `${matchEl.replace(/[{{}}]/g, '')}.html`
+
 const filesInComponents = path.join(__dirname, 'components', fileElement);
 const readfilesInComponents = await readFile(filesInComponents, 'utf-8');
 readTemplate = readTemplate.replace(matchEl, readfilesInComponents)
     })
 await Promise.all(newFile);
 await writeFile(htmlDirPath, readTemplate);
+
 }
             
 buildHtml ()
