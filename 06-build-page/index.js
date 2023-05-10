@@ -39,7 +39,7 @@ let fileElement = `${matchEl.replace(/[{{}}]/g, '')}.html`
 
 const filesInComponents = path.join(__dirname, 'components', fileElement);
 const readfilesInComponents = await readFile(filesInComponents, 'utf-8');
-readTemplate = readTemplate.replace(matchEl, readfilesInComponents)
+readTemplate = readTemplate.replace(matchEl, readfilesInComponents);
     })
 await Promise.all(newFile);
 await writeFile(htmlDirPath, readTemplate);
